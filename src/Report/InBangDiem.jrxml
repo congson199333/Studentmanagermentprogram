@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c500403a-5296-4097-be61-5bfac4adad01">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="61"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="MSSV" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     KETQUA.MAMH,
+     MONHOC.MAMH AS MONHOC_MAMH,
+     SINHVIEN.MSSV AS SINHVIEN_MSSV,
+     SINHVIEN.TENSV AS SINHVIEN_TENSV,
+     SINHVIEN.GIOITINH AS SINHVIEN_GIOITINH,
+     SINHVIEN.NGSINH AS SINHVIEN_NGSINH,
+     SINHVIEN.NOISINH AS SINHVIEN_NOISINH,
+     SINHVIEN.MALOP AS SINHVIEN_MALOP,
+     DIEMTB.SOTINCHI AS DIEMTB_SOTINCHI,
+     DIEMTB.DIEMTBTL AS DIEMTB_DIEMTBTL,
+     LOP.TENLOP AS LOP_TENLOP,
+
+     MONHOC.TENMH AS MONHOC_TENMH,
+     MONHOC.TINCHI AS MONHOC_TINCHI,
+     GIANGDAY.HOCKY AS GIANGDAY_HOCKY,
+     GIANGDAY.NAMHOC AS GIANGDAY_NAMHOC,
+     KETQUA.DIEMQT AS KETQUA_DIEMQT,
+     KETQUA.DIEMGK AS KETQUA_DIEMGK,
+     KETQUA.DIEMTH AS KETQUA_DIEMTH,
+     KETQUA.DIEMCK AS KETQUA_DIEMCK,
+     KETQUA.DIEMTB AS KETQUA_DIEMTB,
+     
+     KETQUA.DIEMCHU AS KETQUA_DIEMCHU
+FROM
+     SINHVIEN SINHVIEN INNER JOIN DIEMTB DIEMTB ON SINHVIEN.MSSV = DIEMTB.MSSV
+                       INNER JOIN KETQUA KETQUA ON DIEMTB.MSSV = KETQUA.MSSV
+                       INNER JOIN MONHOC MONHOC ON KETQUA.MAMH = MONHOC.MAMH
+                       INNER JOIN GIANGDAY GIANGDAY ON KETQUA.MALOPGD = GIANGDAY.MALOPGD
+                       INNER JOIN LOP LOP ON SINHVIEN.MALOP = LOP.MALOP
+                       
+WHERE SINHVIEN.MSSV=$P{MSSV} and KETQUA.DIEMTB is not null]]>
+	</queryString>
+	<field name="MAMH" class="java.lang.String"/>
+	<field name="MONHOC_MAMH" class="java.lang.String"/>
+	<field name="SINHVIEN_MSSV" class="java.lang.String"/>
+	<field name="SINHVIEN_TENSV" class="java.lang.String"/>
+	<field name="SINHVIEN_GIOITINH" class="java.lang.String"/>
+	<field name="SINHVIEN_NGSINH" class="java.sql.Timestamp"/>
+	<field name="SINHVIEN_NOISINH" class="java.lang.String"/>
+	<field name="SINHVIEN_MALOP" class="java.lang.String"/>
+	<field name="DIEMTB_SOTINCHI" class="java.math.BigDecimal"/>
+	<field name="DIEMTB_DIEMTBTL" class="java.lang.Double"/>
+	<field name="LOP_TENLOP" class="java.lang.String"/>
+	<field name="MONHOC_TENMH" class="java.lang.String"/>
+	<field name="MONHOC_TINCHI" class="java.math.BigDecimal"/>
+	<field name="GIANGDAY_HOCKY" class="java.lang.String"/>
+	<field name="GIANGDAY_NAMHOC" class="java.lang.String"/>
+	<field name="KETQUA_DIEMQT" class="java.lang.Double"/>
+	<field name="KETQUA_DIEMGK" class="java.lang.Double"/>
+	<field name="KETQUA_DIEMTH" class="java.lang.Double"/>
+	<field name="KETQUA_DIEMCK" class="java.lang.Double"/>
+	<field name="KETQUA_DIEMTB" class="java.lang.Double"/>
+	<field name="KETQUA_DIEMCHU" class="java.lang.String"/>
+	<sortField name="GIANGDAY_NAMHOC"/>
+	<sortField name="GIANGDAY_HOCKY"/>
+	<group name="NAMHOC GR">
+		<groupExpression><![CDATA[$F{GIANGDAY_NAMHOC}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<rectangle>
+					<reportElement x="0" y="0" width="802" height="20" uuid="fc1757fd-e3d2-4605-84d3-f0350b88e393"/>
+				</rectangle>
+				<textField>
+					<reportElement x="119" y="0" width="100" height="20" uuid="91a6fbc0-79ba-43dc-9058-96c1e146f78a"/>
+					<textElement verticalAlignment="Middle">
+						<font size="13"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{GIANGDAY_NAMHOC}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="19" y="0" width="100" height="20" uuid="ed642994-87a5-47cb-9c35-6daf3f3408c1"/>
+					<textElement verticalAlignment="Middle">
+						<font size="13"/>
+					</textElement>
+					<text><![CDATA[Năm học:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="24"/>
+		</groupFooter>
+	</group>
+	<group name="HOCKY GR">
+		<groupExpression><![CDATA[$F{GIANGDAY_HOCKY}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<rectangle>
+					<reportElement x="0" y="0" width="802" height="20" uuid="5391d726-7f6e-46f4-8385-fe2e0ae3e74c"/>
+				</rectangle>
+				<textField>
+					<reportElement x="119" y="0" width="100" height="20" uuid="41440bcf-a2ee-4ad7-a622-c8e3f9ea60c7"/>
+					<textElement verticalAlignment="Middle">
+						<font size="13"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{GIANGDAY_HOCKY}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="19" y="0" width="100" height="20" uuid="68b7b9e4-45fe-49e9-a0e1-c5ce94e327e8"/>
+					<textElement verticalAlignment="Middle">
+						<font size="13"/>
+					</textElement>
+					<text><![CDATA[Học kỳ:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="79" uuid="8da9114a-cfaf-432a-8d04-856f314067de"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="30" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BẢNG ĐIỂM SINH VIÊN]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="82" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="802" height="20" uuid="3b9708b5-247a-4219-902e-31d61f849f6f"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="19" y="0" width="179" height="20" uuid="e3410df6-5fe9-4979-9475-6afb126d24a4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Họ và tên:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="198" y="0" width="198" height="20" uuid="43d86236-57fc-4273-805e-f72f1788abcf"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SINHVIEN_TENSV}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="396" y="0" width="198" height="20" uuid="2225e43d-47fc-44da-8371-e911905dd943"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Ngày sinh:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="594" y="0" width="208" height="20" uuid="da1f8ad6-61fb-4f61-91f1-7dee7ad8cbc6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SINHVIEN_NGSINH}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="20" width="802" height="20" uuid="7bfa6dd9-fce8-4852-b4e8-1c11fa3bee23"/>
+			</rectangle>
+			<textField>
+				<reportElement x="198" y="20" width="198" height="20" uuid="567b07e7-3fea-4278-afe7-b9ce984cfa4d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SINHVIEN_MSSV}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="19" y="20" width="179" height="20" uuid="30c06184-7c0a-447d-8f74-fdfbca32e7a9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[MSSV:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="20" width="198" height="20" uuid="acc880a6-9722-4c92-bd28-b38db72b0f2f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Lớp sinh hoạt:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="594" y="20" width="208" height="20" uuid="18d51b37-6e0a-4fa2-9f80-2ee670d8d94a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LOP_TENLOP}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="40" width="802" height="20" uuid="69fe2b05-b89b-4754-a830-c9b7c3ede8e9"/>
+			</rectangle>
+			<textField>
+				<reportElement x="198" y="40" width="198" height="20" uuid="d387a0f8-b978-4038-8eb5-c13e795ac549"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SINHVIEN_GIOITINH}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="19" y="40" width="179" height="20" uuid="225d4272-5b5d-46b6-ba48-44ebcd1d3883"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Giới tính]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="40" width="198" height="20" uuid="47f26bb4-a3ff-4108-b839-e55e8650400b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Nơi sinh:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="594" y="40" width="208" height="20" uuid="bd48414e-2baf-4a88-a740-3a3ca03c98e3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SINHVIEN_NOISINH}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="301" y="0" width="81" height="20" uuid="368d3a3d-a7f3-49ea-a9b4-495a986e85da"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="100" height="20" uuid="f65bd293-4266-429c-83ba-43bea2339631"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="100" y="0" width="200" height="20" uuid="f4cb0778-e9db-4c92-9638-8279a194c1fd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="382" y="0" width="84" height="20" uuid="b283d904-ff2f-4272-a170-1d878b64c1bc"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="466" y="0" width="84" height="20" uuid="00e49153-ec8f-4281-a9a7-dbb4bd567fb4"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="550" y="0" width="84" height="20" uuid="487e2793-b891-4fd7-906e-c05690e0265c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="718" y="0" width="84" height="20" uuid="e4c5c75b-4bba-4761-9830-922e1a3a1871"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" forecolor="#0000FF" uuid="8eb6f001-88fd-45a6-9380-6142c015e97b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MAMH]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="200" height="20" forecolor="#0000FF" uuid="459be883-ff43-4bab-a183-7d42decaa8e2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tên môn học]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="301" y="0" width="81" height="20" forecolor="#0000FF" uuid="445d0000-6d83-4394-aedc-bdbe46674c11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tín chỉ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="718" y="0" width="84" height="20" forecolor="#0033FF" uuid="be0940d0-e928-41b6-b384-520694ad54f9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Điểm TB]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="634" y="0" width="84" height="20" uuid="b617dd29-524c-46d1-b645-20b1a4ea64d9"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="634" y="0" width="84" height="20" forecolor="#0000FF" uuid="88855e7a-538a-4412-a59f-727ea5c4024c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Điểm CK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="550" y="0" width="84" height="20" forecolor="#0000FF" uuid="9bb39003-1171-4223-9161-85a2c56cd335"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Điểm TH]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="466" y="0" width="84" height="20" forecolor="#0000FF" uuid="7e204ed4-b66d-4554-ab78-89ef0cf0e4fd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Điểm GK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="382" y="0" width="84" height="20" forecolor="#0000FF" uuid="e2b138c8-84c5-42b0-8ec5-f493badec49c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Điểm QT]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="718" y="0" width="84" height="20" uuid="5370813a-0f1f-4f5c-80ef-173f9283e1fb"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="634" y="0" width="84" height="20" uuid="f521383c-fd47-46d7-9551-5df227105721"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="550" y="0" width="84" height="20" uuid="e8fd9cf9-5997-4f9e-8dca-b6bb7cd8e5eb"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="466" y="0" width="84" height="20" uuid="55d2fd8f-c114-4f24-b961-469309ec31d0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="382" y="0" width="84" height="20" uuid="9229861d-0903-4d0a-8a49-47e0c2c9f9a7"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="300" y="0" width="82" height="20" uuid="0c07b098-2a0b-4b67-8aca-aa9118ca872b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="100" y="0" width="200" height="20" uuid="304c264e-978b-4037-8543-7c00664424c2"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="100" height="20" uuid="d35f31fe-a654-4b22-a42e-c986e8c98151"/>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="efb16a02-6041-4991-95d7-7c6f3859e638"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MONHOC_MAMH}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="200" height="20" uuid="515490c7-ed00-46c3-a416-8b1b2e47a7dc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MONHOC_TENMH}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="82" height="20" uuid="12c66b55-19b6-470b-aee8-ec18509619e4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MONHOC_TINCHI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="0" width="84" height="20" uuid="b59f41a2-72f3-40ec-a3bb-e294e6f7794a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{KETQUA_DIEMQT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="466" y="0" width="84" height="20" uuid="247c8d61-f010-4bcc-a6f9-e9f264521a5a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{KETQUA_DIEMGK}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="550" y="0" width="84" height="20" uuid="1c904e10-a27f-4e45-926b-5cf78bb2393d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{KETQUA_DIEMTH}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="634" y="0" width="84" height="20" uuid="e17da8c1-5ba7-42e4-8637-c1762c91c2d4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{KETQUA_DIEMCK}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="718" y="0" width="84" height="20" uuid="35d867e4-6fe3-4a09-bc65-01dda646f346"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{KETQUA_DIEMTB}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="56">
+			<rectangle>
+				<reportElement x="400" y="20" width="402" height="20" uuid="aef964d6-eaeb-4bb0-9a6c-c63ef95489df"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="400" height="20" uuid="c67e20b6-c306-4b7f-843f-3a8aa9b5fb2b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="400" y="0" width="402" height="20" uuid="d13b321c-877d-4ef9-becc-c67ca07d0fd1"/>
+			</rectangle>
+			<textField>
+				<reportElement x="400" y="0" width="383" height="20" uuid="6162ace8-ccd3-4b83-adc1-ec32f355f411"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DIEMTB_SOTINCHI}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="66" y="0" width="334" height="20" uuid="1f3849ed-3522-4c61-add0-aa8ebd395bf0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Tổng số tính chỉ tích lũy:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="20" width="400" height="20" uuid="18758f12-13da-4ccb-a3f5-63d104225a6c"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="66" y="20" width="334" height="20" uuid="5d6dbba3-2097-4c04-8d85-074f905a6685"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Tổng điểm trung bình tích lũy:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="400" y="20" width="383" height="20" uuid="fc8e5f7a-2d78-4f54-a63d-4e0491c9706b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DIEMTB_DIEMTBTL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>
